@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    
+    <style>
+       body {
+            background-color: #ffffff;
+            color: #000000;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.dark-mode {
+            background-color: #121212;
+            color: #ffffff;
+        }
+
+        h1 {
+            font-size: 64px;
+        }  
+
+        #random-btn {
+            font-size: 30px;
+            border-radius: 10px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+        }
+        #random-btn:hover {
+            filter: brightness(0.8)
+        }
+        
+        #parent {
+            text-align: center;
+        }
+        
+        .first-box {
+            margin-bottom: 30px;
+            justify-self: start;
+            display: inline-block;
+        }
+        
+        #first_img {
+            border-radius: 30px;
+        }
+
+        .second-box {
+            margin-bottom: 30px;
+            justify-self: center;
+            display: inline-block;
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+        
+        #second_img {
+            border-radius: 30px;
+        }
+
+        .third-box {
+            margin-bottom: 30px;
+            justify-self: end;
+            display: inline-block;
+        }
+        
+        #third_img {
+            border-radius: 30px;
+        }
+
+        #toggleBtn{
+            float: right;
+        }
+        
+        .selected-title {
+            text-align: center;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            font-size: 24px;
+            border: 2px, solid;
+            border-radius: 40px;
+            width: 200px;
+        }
+
+        #selected-list {
+            text-align: center;
+            width: inherit;
+            height: inherit;
+        }
+
+        #select-img {
+            border-radius: 30px;
+            margin: 3px 3px 3px 3px;
+        }
+        #dark_mod {
+            float: right;
+            margin-right: 10px;
+        }
+
+    </style>
+    <script>
+        const youtubeUrl = "https://www.youtube.com/embed/51RMDUwU8Zw?si=QJB36tjDKLUcxzFQ&autoplay=1&loop=1&playlist=51RMDUwU8Zw";
+        let isPlaying = false;
+        let Dark = 0;
+
+        function toggleBGM() {
+            const iframe = document.getElementById('bgm');
+            const btn = document.getElementById('toggleBtn');
+
+            if (!isPlaying) {
+                // 1. 재생하기
+                iframe.src = youtubeUrl;
+                btn.textContent = "🔊";
+                btn.classList.remove('off'); // 빨간색 제거 (초록색으로 변경)
+                isPlaying = true;
+            } else {
+                // 2. 끄기 (src를 비워서 음악을 정지시킵니다)
+                iframe.src = "";
+                btn.textContent = "🔈";
+                btn.classList.add('off'); // 빨간색 추가
+                isPlaying = false;
+            }
+        }
+        function DarkMod() {
+            const dark_btn = document.getElementById('dark_mod');
+            const bodyElement = document.body; // 최상위 부모인 body 가져오기
+
+            if (Dark == 0) {
+                dark_btn.textContent = "라이트모드";
+                bodyElement.classList.add('dark-mode'); // body에 다크모드 클래스 추가
+                Dark = 1;
+            } 
+            else {
+                dark_btn.textContent = "다크모드";
+                bodyElement.classList.remove('dark-mode'); // body에서 다크모드 클래스 제거
+                Dark = 0;
+            }
+        }
+        const img_category = {
+            YISANG: [
+                "https://i.namu.wiki/i/-0j5eL7HS1FRooWzwc4j8_VXYW2eChnWw8yx0hd9Tezi0tQZbeY5Z8PDOjgal_f2xMn2yW9kXeKZOSlqy_PvPWPVx7rs3lG2qmeDdCYpncvYaJjCZXv2hp8orOe1htxGX-9Np6noYDrTnGpi3N-jTQ.webp",
+                "https://i.namu.wiki/i/MOs2SQq01PHRBIK2-7o7ZD9bVL6xF50EgXOqKg-Kba2jdO9Pp2qdL_qUu4tLS_jEKWy_Wr8JzmvgiagW0-3SACvwDW67tUGzxzqoZHcO0XPaZsISHUm7F0uUGxMOw9tRoXmvh6GU-1jA1TEgKaV16w.webp",
+                "https://i.namu.wiki/i/wf2axZHjdSVcXytxGzXZiTvwdyzztEvpyA9NSuLLmjchIw5ttIVRyH1cgqSC6BXHwHKzw7CFE7QVJON4x4Sb851d9q06AvXdyaLuy2Hs6QzwElhcjFR-O0i-CYMLYMrccbzP7FYzMQVbZeUC1RacRw.webp",
+                "https://i.namu.wiki/i/uswvK97DSySu3dDUI6JqnAd1mQ2vvlqLYNKj4DR7ZjH4Hj2IDe2d0bGdEU0XwXQ3guJKtHQktQMtB0KSQTO7zT7-9M9UvqJUDt9NQN6q7l8e5lZhBmthqrZ-J-vLBHwbNmHp5bJHGsnN9g874HiHOA.webp",
+                "https://i.namu.wiki/i/utawv4fIOhwL4J1l26-JVwhLbGpHLLiMJ6ds43CrfJYcrt61Q50KuCCMGDy2ECCv1EGXYH4iHgh-kjyhhBdwMCMxf_X2nKZU92YR0LbFds2ul7531TZ6f4ef-q3OrfJn80m6ImkskjYQVVS3O8-qrg.webp",
+                "https://i.namu.wiki/i/a-A6DRxVGuHfBUI15Kdi87JjbCVaPwdvNi1pP2451doth73o3MMfyWKFjKV_sIbQx7mMYiYM9lgrsJgOaB-Ti8P-Hc6CnP0dQscGYBwqYvxFpPatmWlLN6ADL6HF1GCAn9FUcKgo8GULpbhhDZXcCA.webp",
+                "https://i.namu.wiki/i/hvWqjCpG0WNMv4imORdVOartjOMud7m1r4R6zzImivWj-OYPdHyOfR2jNJdZ1yXCo4fhDm17cTswsPoO1sHrk_x0XX4iUHGeY7JSzW1UVHWUckt6MEghQZGi8PiN_eVUVSzrv4ZJF4Ggo_T-A93GFQ.webp",
+                "https://i.namu.wiki/i/Wp13h5u98XMX58mhYFtwg7Tvp2iCDYRibgm5MK68dFqGTKH8lIcJSTOKZzXEbF2Ag83g6Z2Ua635U2-nNPbxXZG2wYZ3DzLAJFN1nSymA_sdBIR7oSV7xWhlbPHAWmEYsGn4CgFx_vZXCLfS4d1Dpw.webp",
+                "https://i.namu.wiki/i/IZQnPqK9nA-3SE50O6tM8GdOMbW_cIO3z1LA46D6WRUCywR3h1HtKMoxwa9HuHWx0cQrVwVUlgOSYSnM4NWQmXa4TZ9um-HPLz2fOm_M6PWLlEi5HBsdjFuLcnLMaaNPz0xTWnyydN38F3HV1vwhHg.webp",
+                "https://i.namu.wiki/i/kCzem2WrlFXlUm1XVzIiGsnaA2s9Piqq58jErlD1_CES5Afez1LjU_6Dw7oFFyV6Cwpfvx6kR8lvuQEgq_vMEXswGQwOernfDmbIZmhkCzZvlGX5qL-vGQuyEjX1MNXj02JdBn5r1RulZ6TosDRFdw.webp",
+                "https://i.namu.wiki/i/NO_GyhTPNIq5aqhInpSkL8qPwQ5vZZ3RPQx8QlWFDyxkPKANkr5y-Q4T3D-ai8YQoPeXo8hrXSIxSv2r6Ut8FWWrkqgYY__xD-_YWxzw2XI7in1vYpXGK_CpSSpLRpy4ZmEOd0tGAL8npq1ET61XLg.webp",
+                "https://i.namu.wiki/i/ZhYKXm5ckL4NeE3OK8rusYYpL_0-JzJWe0W0gxciXdlIuqKXvPvblPdrIQHvBsHkaawGfK38LvKgezXg7t-0FlWxF2fYoWgp2PMhimtyqU8D0x54H4A7L9j-fqGHpU3mGmdsfT4RnF8M6vmyloSF4g.webp",
+                "https://i.namu.wiki/i/ot3Gfp7U8qU09gqA4e6_qASbk1Gra-YKGLiSKViO_7JHDM2ACYJ4-g9mmX9jH3Ai5_KhrWM3zsBIyDk_3ATZeKld59QfuEwGayoq6JXMheCzK-AkunQk6eTwF99fxlBhQf2rTGCdp4JblaOfx_g5ww.webp",
+                "https://i.namu.wiki/i/xVybD9QJPftvsyNYu4lNr7UeEFK0C8Fit48EAsZbmr03Pt814dB8uq9VN_ejcPMqmol4zDaZ7v50s2Lri6ljNcwhdIN_pvARUvQ7muNTV91xAUpK_afFocbjIx2XWRv7BHYYRuGJItr34qjcEYe3Zw.webp",
+                "https://i.namu.wiki/i/DKn1vhw0RxOji8maMjyDtOw4GasyZIndIM6HLGPDo5qX5kzPVqle8vbNmDOdbHv6jX49KlqGwJ4DhQNFSqvTRRPLGWEKijxlm9G3yEOqNIY3lAHisU7Yfy-_IlItTvaA9jDCh6kaZJCOhZUEQcpVIA.webp",
+            ],
+
+            FAUST: [
+                "https://i.namu.wiki/i/en_NempwXJF2udjzKqSQGZIIMs7vNpqpXaEJ0XmsJqiaP8gFOqD4Ay6IKMr6jpyaCYg0vOBcn9a-8UkcOv4mjsuP7VpOmMk-elv5y22OVqUW2uMUdcbgUG0_VZZm8fGrhHzFHoSrVAUOrj_3NNopqQ.webp",
+                "https://i.namu.wiki/i/PYYJtL12PcuAvgpjPIM0ziP6QjU07asEZliX2DOdjt5nRMp20JNl_Np8XImO7_bQt7X2DOtKENkHi2dqvvDNv3jmucAbFtDIQi1MmAUUVvs5aaZvxhprQINdHfLvYNZeYtFn_B9uAUB4s3OG88cq5A.webp",
+                "https://i.namu.wiki/i/C2VGLqPOIdQLUW6JWoqXoMUmshz0PoFuP7JnowJr5aoLVvmRb4D16l29p8dopDf-wxgoiEyIuM6_TwBgsn-l7JV5_Vgg0oiiPTuevx3O-dMkdQ7mMqiF1zTFOX35hZ-LBTb1u-Ggk75ASrDVeIKCVQ.webp",
+                "https://i.namu.wiki/i/IgaAhZPI_y1TEFaBHa_klMUpy8jRv6-VKEFN0ZHEhj5_5xK2-RfuYQC6uXlf0oRb3XEKvzcSLNuq0yZGEIPPRDOTXxtfdapfh8fnUv8W5-GdrZCRrXlaPdZStHAwSU7WOZ4pldM_wsXLB2yZC_gpzA.webp",
+                "https://i.namu.wiki/i/hbINKydjJPnGOAPkFAMQO8kGGBtQH6EGOZpnDQ4DfvCrdjiApfgBNPvIv10XH2BaeKEKM6YSXD2nbAyaxmjf8NqZXH6gVB1VYkGz9h0JoUBdT-QFPXsPgAZGIMFJOcH073IPKw1CaGz2RJY0DRWPKQ.webp",
+                "https://i.namu.wiki/i/oYvnsxs5uWurQ8uBm5h3u6oJvyPVqZi4FxPHRj10EChfRSmawaqSIb6lzrUotdmqP51JjyoH41tECPsQr3wVFTr389Ta2EB-cC8cCijBIwwwc3B9bl5O5gxD9OIpS_rbB0lG_OgDIAOSUKgZJGLoSw.webp",
+                "https://i.namu.wiki/i/9jRpXjZ-kU0qEcfwNd5k9ctrjeGr18dGx-mDC55ki-lIBfMwz7_LsMEA2brwFR_0YKZPivfZ1uymYX8QdDNmFNaHsJNzyXQteRVGH-N-URYsVcngDswIS2yVNWe5Zbp5Yf7QIyx8ogb3GdwsZLBlsg.webp",
+                "https://i.namu.wiki/i/IKWqeldK7kmdu75bI_p1x-R72hleCxhK_pF6NRSV3tJ0R5mG1T7_mERNeVnrhRvM56F4Orxzye89f1Bt3SSv9IHxpR4GxZOVboV2C1pT7tUpEpX_cXR9UlxMEviyl_3FMXY_MmtuZ9Rdl27Zzm_YEA.webp",
+                "https://i.namu.wiki/i/DR3QT7VmVX-n40XwH3xZis-e0SlrIv6vm7-5HsSha-eREnQ4hhzRqIcqS_e2NR2P7K6Rpo0RBOcF2NnL0CxfNau28N6I-z8pvC5NU8t40q534uTagc8dPCSoTFP4HJJ-TIIHEJxYVlhDGQ5SCL9hGg.webp",
+                "https://i.namu.wiki/i/lypgJMBkys-lxtYfc_1NS3PZWob8aoD0YSInusMZ8N5Y5LMOsmm3d0XxIgR_n0j1lOre5sNfJNVPTZOC0nOly_eBU65Yu_1yp_KY5uHZBfyWYlGMFYd4icGPo9SSVVubiJGZb6fLU2MBg-O8rQXivw.webp",
+                "https://i.namu.wiki/i/KkXTUnH7_1DAGQPQOKN5VxtB_p9GlR7aS7gEMqItywqQb8notmkLzBxUA1GPgZzB3-y17n3WsQvwwd1fd5HOhXwalx9f6AWaQns1G2t6bcbF35oW5b3edHUALMiUbY847Extm4gaAS4RDzJWiTEbeQ.webp",
+                "https://i.namu.wiki/i/rBtzArrDfi5ovefAtIUBBdxrmk3dAZT-rd8MvFIk7uvVFWmKvgy4pqB2qwl8Yd7yZH4c5IvEWcCQ4wu2AxHIbUm1AJWGTpGrQ6sqpnsPS26P3LOfufmomFgO6FY__DHAIwwrHkBoa9Iepz8lo64yVQ.webp",
+                "https://i.namu.wiki/i/uO3F0q9R-oeeRpEB4E-qqmFkyvMWOtK-Xx6oenWnqgBNNsJINB4THbffHFvLOBuR1AhjF9xBjMO29JrcWIUPZhcBJ9E35O5vWDDYIjzme9f2om3mb6SLJMqKDNcQB2umU3vzn4CZKMqcrvcYVoQOlg.webp",
+                "https://i.namu.wiki/i/xWA4z7lb-8Xi351OxLObO0nJw_ntqS9-rloGrqYibjZ969EgkbnE4XXYjSZPxfPQlfvmh4lIXS9Hj9q7I8fPxdclHrSZBhJZ_cysuEx6us08B8YPkCPwrThUijSJ3cG8HERJHg7pKBPb36M5pGS9QA.webp",
+                "https://i.namu.wiki/i/e4bmWsTqrn02hVQ2-nrNgsJlztVCWzDvBkXUGD9mu6ctfTB8oTTTeC9bU2uM-gxHTPq27BHV0IPetrg9yy_lfHCIKqkS967a3ZHuwTXDGjP5NP1_M0Yj-q_77izY-rt5wVX7fK6bWEsFG9ttj_Hzug.webp"
+            ],
+
+            DON_QUIXOTE: [
+                "https://i.namu.wiki/i/cenTOPZQZkMs1C0ED6OThrEVeAr8JLUZtWjToQvpHy1qPSDkqXxFGy9fgNa0i6AUIfg3SVXZeuJNgYjK70rlTBWjVWtSMYvHv7jev-jzN8U6x7fzOa_DL0IFypVdtid17PYPH5vpvUqaCxf_v54TUQ.webp",
+                "https://i.namu.wiki/i/ukOazuRynnud0xWtZlZkpgio6rpmws3WBIE7q5jYBfiEq8sdCNxVh9KsoVa0HtxDUtDlXTZPh8Oi7Jh0yXSLhjtmKeeVzoG4V530KZaCrlItas6Zf2f2rDbWTotCELsCnELOGKOEgKr1EKzpyT960w.webp",
+                "https://i.namu.wiki/i/bDrZngZvXVtWZoYks8meZmyBrgOOQrt0Vi4Gk5zOLpE03_cQg9eH3WBevffhuASmk399QfC6rOF-eldYfrv-Q9zPhYMOgbn3HQKdaxCL2YLfbwYvmSps263Unvvm62CbJzxOWy8Ntg591WXg2LPknw.webp",
+                "https://i.namu.wiki/i/03X9sOP5_Vssako-5xCd7mDlQnw_QHzJoMZuloj1e6g3LysbDVOOD9i4FmvWwTqtPqXlLj6m-qmglTw92cWuQQMD8pOST54nuqvViiaVr9yz-5RiRDf1f_LHIc57XlMzo-tYkhlkHzcszIhAnx5Qdg.webp",
+                "https://i.namu.wiki/i/QswEUQYq9iyhIKGBXG8kpJY5rHtlIn2z9wo9L7kmCiuJg55BX9rypEV7eBpvkI2Jh6klF3ARD0-_pcrxVF9gjFQzmQvof3MugWvWVwyVrPzy_lF93JPdjcd_xStCrJXKCmONSbCKCmkeYz61R3W3CQ.webp",
+                "https://i.namu.wiki/i/u8OAzhi5Z3R0DDzVrr6Wr68IHh4GYdsxW7E4Haa4yePAoYKUTaBcfR3zp1n3W2oN5pOIQvFi-Ps5ijIoqCB29qA1wXBEmY2cK83jTiFQF9Vru0RyRDIjrWJpUslYuYvNUo3MqJ58qbyprpH_Hl4yiQ.webp",
+                "https://i.namu.wiki/i/8oSskKjS4olqrxRQpX5iyurQgBtR1T_Eovb3t29fPc2aRvlhg7d93ACqj6a99QrRLDtQkHdN7lIR1UJcY5jWYNqXGanRTWCXBmdQKU0rMy9UN0adeQ3rLQ11xQMxjNUg5Ta9s3q_7w0BYrvclGnQ7w.webp",
+                "https://i.namu.wiki/i/TotPLoBerZxcmCmOQQlwQ-oSH0LK5cKmqJbyaEXzh3WXc0havlaUSS0g6omMQIsxMTInATtRu4QN4I17CEHjLYUzQVKBnhJUvMih3hLjWCHx8Mkkwl6Uwa9C6MYlXtgSMBXCL2dDUWjMIvB1Ryi07Q.webp",
+                "https://i.namu.wiki/i/9478nempfj5HCTyzf7seE73uJdJYLPwjnktnl03GUOjE08n8IxX08ACZLYkgkrIAxh0HEpWeGxvqeBFGu5yQUm2HIQD1r41aSoprygP_H63mh9GzKKEUeh0_ui6kFXOnODC09UlBfY7dfGqVcLSjiQ.webp",
+                "https://i.namu.wiki/i/a-juC2-RhFID4p8SJGg5bWQgCn3t2Ry_IvEGU-iC4Piu7RsGQ7m-EFe2H9dr3B1ThS_X8tWmFcDT_NtCBFBgTKKFYoIxGsg8YcLgmbkk68MbTPNZE30YYO36x3I41OOWzpemiKqrkc1vbBzRQeuRZg.webp",
+                "https://i.namu.wiki/i/Lzyp5M3chLJlKVDL8XWZuG5RLCqL7ocf6W14cSkPWYuVHxnYYHa0BOqY1tPxbSRw8x0ZSt16MXPtvwrEPjfFHVNzXOztn9B-6EnDnjf--HChd8EbSHmgHNWYJVpIJjUzWdv3d9UWh6g9JV60v9kdhA.webp",
+                "https://i.namu.wiki/i/s_sl9RN_SG09HQOToLwcy5UHIjmpYGrWvVmuNbeAU12VrX7RW_2L00L9EOwDIz8xajJPPTYD9ofZvaL3j9DYUQtKX9qAQZyMs9lRYgQub4itXsi76tlG-I-7yBnrUpIULYLEISFc0MDDGJJkch5fUw.webp",
+                "https://i.namu.wiki/i/QNZzMHTy1b89cOniTMByoTNKF4MS9nuZ5tu0A-0zZVSUlmh1vdUzE3vmuFH_tQPdgSgSMzlERQVrgaYEnzpmJYZWbclIeq4q132hSGJoiCm70S0RpSQ2ZuvSgWyICBRv_5jY57kxSVGdqSMblRT8qA.webp",
+                "https://i.namu.wiki/i/pCHSWygCzwFh0raQurPukHv71tB9GVInBrsgqYVmlrxmwb6x4bWhX5cPsxIfAz9EigzdrN7UkRP2joI1hI3TZ6S8es2ri5GzR7MmrAm7sy-ZbMjBcFdDCxBRlpJ2KEjSfVNEMbNH0UKS5FvIcsI8kA.webp"
+            ],
+
+            RYOSHU: [
+                "https://i.namu.wiki/i/-sGm2PdUVYjMSszjyEhsY2dSJwGaPSLe-I7Oohwvkk_MomZFtdp95C2HptryXR1beYkn-_ycHyj0RfPGELgsMFxDtbgdeNTWLGDKn2ZeVdhQzb0t3mVmmVnuKtGTfk34ANWfWcrcLixPDS_MrEFH4A.webp",
+                "https://i.namu.wiki/i/0MXMEnhnl7k28q4ztsS_t9yGtu2pOdYwGYjvX37T5r-fDhsDTcXqBAhdiRJS_91IzSIe1orY2NGo31sDRRtPUcuqqrJkw4RqjKUHMIJM6B9ehvBJw4iHShKWEj2LwZY5_DN6k6RN6rK9bhHox46QSA.webp",
+                "https://i.namu.wiki/i/i44ABIOTpv2dyOcJmxMmVuEz4MoWhpfJ6KvUdEHjmz3ohbdduFKtfAMKE3H47K9eAoOTCKRxb2H0T3U4tgjJbf1X5WXwRzxyEgpS08TUBNkeXYSTPs9WOkS1VFFKcyJhdjII4JRkVZXKcb4LriF-Jw.webp",
+                "https://i.namu.wiki/i/CDYAsibmf0NltPXmKrApdyIC_7QScDa_uYkM9gJzK5o9bEOZssKSbJAMnMxAlTBO4XuTkydEwbULuAncBpv5joE9R7ZrQl9JOFFzzJ-cwKeGApy6MalG9V3hJG0g10SGFdUe80UAinIP6qjjc8kXXA.webp",
+                "https://i.namu.wiki/i/maSgtn9y0tVaxCftJq0f-dIlYnFBUc0D_qgNKbc0e-ZMYbJyP2OA1leKRoFkvxoStOHJXri4t-QW6snQIS3OxCgRPyvKIBqm10AznkZcPxf1HsFt47lvgrC6ARVnoNhqhG2JccNtbL2fpdg4_zLMPw.webp",
+                "https://i.namu.wiki/i/Lr9Yo434eOIyXacmE0Hy4CJS93-ZOzdeooiUM76WQ1rXZaXIfMH-BATIXgEWURilqN69Ufdg6QCpDvgJ3zDSVBdCtmA8XrQiarzSp33tk8NPcKFjSkQhy49UXpk0lfcdH5UfHEtiGwOaH38PJv6oag.webp",
+                "https://i.namu.wiki/i/cDkDgjxCTi93IQxtx36b09Kf5nbd9MEqdE4bYjQEUGeA1l4aZmDxb6fjBhWS0ludiSbpd9Qci8drsbUS6M1HZAdO8MZeEov3k88v3ss4_2zAbndroZPE4kHSdY6JuA7OxKBf3j6nOA4VdBWlec_Vgw.webp",
+                "https://i.namu.wiki/i/mGgB5Au5-8LZiNJQjnPD6kGYtkBTdy1ddTt44n8wqVXrL8bfHWFT_m6XsG-_cMVn3jW4TuVZyN3KElwsqfUTemroxJy5PFSS2inp_a_8BMOrJ5e7jdQ6MaklYs5tK4ZJXVEzDccZ1TTAIdUNhsRzqA.webp",
+                "https://i.namu.wiki/i/nSw8BzBaELr9AxpJGz27GZ2f1TI7tyn9AA_cDvrvj7Gy9jt5dPjwrSXF8RzFo-LEnwGl0PTSgiajPK7yflDJ0LsEyotN7zNIHmKNmezTQucxp-pV-xd2osDjqKZFsW065xhZooehoADYvz4eXS424A.webp",
+                "https://i.namu.wiki/i/7EK1Z7lJ5W923wknFY2HtfrpQZ8g0pbwsAzSIBpuXxkU79vsrKZm_OErOZP424iUO2EAPOW538mEdw08pootannJzyLtCHuGYhp7sIAj96J8BapT3a-MQYfkujTmzsa69oXIwGXWioFdZdLxSXkwXA.webp",
+                "https://i.namu.wiki/i/isRfajusedPYbMp85lQ0RWLerPKGLQlbp8S5VTQJZbRp5x5AZGpaQTEKVDI_BS5dIlQOuM9Hr657dCsApewANNKoxUGsHl3KYGYpg_7Ew9yiNQDH_BGYinanR24BGuP-WOZQWpJIc1q9-lq2MOvHAg.webp",
+                "https://i.namu.wiki/i/zyUA8-1LaMkvWO5pIuBCnOGLwEvc_arpvN8RydRhEVPnkAVLJ16RQymD7OTLPTaHc_KidRO6Sl5nRpmr4QA-SSzeNiGxDw79zdtWCnGs8nbYh0Evpf05HqJIPp3wXKHBExrDwNMNtXZLLDsdhkxugQ.webp",
+                "https://i.namu.wiki/i/vLc8MsNnGIajjohUCDIiaXS_VD8uH9DcXDM1-gshzgc--YSKVEa7qaTqpJ-bObxdqydRD-47J4sAw1BTOlY65ePM-k0c-PVAAi0nmeoCgVAo1iBDSm8eytPqz5N0YrR0tr0u071ag99X100cSNiT0g.webp",
+                "https://i.namu.wiki/i/ZTOOOdIK6iwE9UYGJtP2L8NHbu7pJvVQ7tcWqv9M540w1rCKRRMV48NFiTmWyJ-vLffajM5XyqSU4_33qKxBazZZU5exMv9FcK_M2UwB6pDG4KJrJKKt360GgQHcs19SNLe5Wdo-O7dfai-SZM4A7A.webp"
+            ],
+
+            MEURSAULT: [
+                "https://i.namu.wiki/i/WuGFIuaBNkoPQNTVSUAbfjC4FRpHGvBFYN5zZH_OlTJznFJqh1L7E9B25RBo8G3oBb47xYTpks5bfmfXKIq53Eo9pxZAL5sIoeq837fVGWKngCVu9xejGIJPb8DTK7hgfk9jdKoNSsWG8Z34L4w7gQ.webp",
+                "https://i.namu.wiki/i/qZkFCa20JAAeHthUiJdxHh5-hHBsXnfcdYesWyMoI7yQ-mWREuEjnI8gk-sdonUSUAqplCGnPVHgaLFnPaMo1vZ7y5SaH9C6lieSMMFm0tSkx2nL4OS28qcsu-JARmE2gxXZN_GcqDQ8S39IaAD5xw.webp",
+                "https://i.namu.wiki/i/y27ZYgnGNJVWrBg3zKhbbM9khSThooXBdaFPyFHyw6szv3o8MX4kHd8Sx6JqDn102NOfcG88aSlV1gshprb131kZkfDPxZ7BFu8OoaZr5sFgGaag9e__o00mJ11aI2U9PISpjIAWQ9A6frVN8XMCOg.webp",
+                "https://i.namu.wiki/i/BTBkrSOuAKYp215IzBsqeGN_sSsz_kRijXXOBiEyoqwL0C4x77OCSfznpI7X5wgoT690q3SVuFTO1n_xeCvYlLgIc-VkWWF2RE1ntDhYkwUE9mxgZrB8pIOzsW2DCK733E7Z3XoOEWv72smdjlnMiA.webp",
+                "https://i.namu.wiki/i/5qGoWroJl1ySCZ1Hnw_4OH3XSCa-GX-KRwpNraVANwqx0t8Ggd3vqDyHu9y6kMVRVBEP6_2bNlJkRxJGQxcZvL0peeG-3K02buNe4mnxYI7hcRjL-xidnKzeGjWIK0-5mXHIiGvpjCuRCBr0Qr-04g.webp",
+                "https://i.namu.wiki/i/s4LfcgzTLKjrGQ7wsF7zjMaFkHDhmBZm9hES3PY6FEo8FL_8ERmk5wHZ_5tG29p_kG2uQsfSagD1-RWj6BVhshj5oOiOQ9NxH-YXcnBC7BQcoCOHCdN1HGQf_dOHbYUd-dg7cmF7cvK6wGF3GIgUAg.webp",
+                "https://i.namu.wiki/i/Pe-WdreMJk12pwTaV1L2ug2c7lXb8UUrh8DMPSmxRbcPpQzOytY-I84d2OPL1GlhAd-Bm65ufCUxWORdbIkzl3yqP1BMeQL73UnDSFBChzJp049RhY8nA-hHvFrLIuoJ7qsVuMy26P9FiuHa5QoYOw.webp",
+                "https://i.namu.wiki/i/PaxXkqKSVfFp89BxNI-Cai_WnSM_fQlO-dH6aeH8gSjhqCK7nC7cXfV8aOZWFMEitPEuCeUjcC2sN3RsOYlchLQLCfh8RhHJ1XxjZG_l6GQwjSLc5HC2zKpvy444FOjPdHZ6NIaeviN0CV-RK41lvA.webp",
+                "https://i.namu.wiki/i/yFpBOA3m_6s-OGfd6j9tLzKwOLGzzytC_sDTMbL5wXjG17VnIBrI1PqB0vl2mZxZXA1OiusUpEP4p0yyXKlD5--wgXiIZcWKdTMj2LkLER5JzRRmkK614JqP4mq7aZ0tVyBrE5eF09YfSOXQCjKgKg.webp",
+                "https://i.namu.wiki/i/fZwUsm2uy33qdFDip2W7UBA9lIL8m8-CJCEztoK3pDQebyXPaV0GCjsvDhp7pTIm1Cnhd-JPpnN2R2kWiiL9dgpvUImSIjFs8USZBt3Jygc9jJO-4Tn_4aAR64WFDpUiGYHlz8zCX11GK7fnGTSnUg.webp",
+                "https://i.namu.wiki/i/KVLopvjgBLb5aaCxSCNi1_JxTXRaRVHHEMDJRVXT1J687YGFe3PqxformVHOiJ1ng82xNl7i-t5fnycAnW8W0BVsPLJU6dOMoDlhgp93XaK8KlACfzILRx5iY7vEaq5KAaO9REoOcHVqwyfEIpK2Dg.webp",
+                "https://i.namu.wiki/i/OdCW8GgPXlUhQLxjwwqk73A-H5cpRAHL0eA-qU24wXOcjXxoAW3mINZW6VuWEj7y55DWvr9uzr35sF1Mjmj-m6HPluMEViW5OLLgMuLDpo7KArcilMVcYtoKXAZiXUK3F08wnJFyMiuOSxv0QG545g.webp",
+                "https://i.namu.wiki/i/fmmFlVw4EqYX26EjnHVqZ1UTkF0aRxWwAQSFSm5BumZWRf_FusfVPma07sQIh6yVtfeZPG3hRnMDkLA-nsx_aLET2yjsdCnJwAU4rusRf0bzvjHl-73ImN4Iamknrk071aoDICiLqpm7KYaB1D5AiA.webp",
+                "https://i.namu.wiki/i/2aPYpfwQ7esGq6fTY2KirZkKBTu8fX-Zj1anfAooZNmohpUQMdV2PGfEXaRL262EKpesVpNxdvD59YPjAplsNZkee5H8DvRSXL-cAWL-D0cWIvTcNOrfMzpW-MKzP4zjfUM9PxQBTm_LjpqQTOik_Q.webp",
+                "https://i.namu.wiki/i/50M9r6VDI_xOExHLBKk92fe2a9-tACTSABam5SUQ5b3D4T4uaxxqZQwaPHgEnyZHGmMYeWhNPGafzT7mBMsSn_OiwhovK4akgSzv_2fOFEySeB6Dq32sdDb4gZb-o16BMf8J_3sXE4qYqG0odIXn6w.webp"
+            ],
+
+
+        }
+
+        let currentDisplayedImages = [];
+
+        function changeImageRandomly() {
+        const allImages = Object.values(img_category).flat();
+
+        const selectedImages = new Set();
+    
+        while (selectedImages.size < 3) {
+            const randomIndex = Math.floor(Math.random() * allImages.length);
+            selectedImages.add(allImages[randomIndex]);
+        }
+
+        currentDisplayedImages = Array.from(selectedImages);
+
+        document.getElementById("first_img").src = currentDisplayedImages[0];
+        document.getElementById("second_img").src = currentDisplayedImages[1];
+        document.getElementById("third_img").src = currentDisplayedImages[2];
+
+    }
+
+    function moveAndRemoveImage(element) {
+            const clickedSrc = element.src;
+            if (!clickedSrc || clickedSrc === window.location.href) return; // 빈 이미지 방지
+
+            // ① '선택한 사진' 리스트 영역에 새로운 <img> 태그 생성 및 추가
+            const selectedList = document.getElementById("selected-list");
+            const newImg = document.createElement("img");
+            
+            newImg.src = clickedSrc;
+            newImg.className = "selected-img"; // 스타일 적용용 클래스
+            newImg.id = "select-img"
+            selectedList.appendChild(newImg);
+
+            // ② 원본 데이터 배열(img_categories)에서 해당 이미지 주소 제거 (다시는 안 나오게)
+            for (let category in img_category) {
+                img_category[category] = img_category[category].filter(url => !clickedSrc.includes(url));
+            }
+
+            // ③ 선택되어 아래로 내려간 이미지는 상단 구역에서 즉시 비워줌
+            element.src = ""; 
+            alert("이미지 선택 완료");
+            changeImageRandomly()
+        }
+
+        // 페이지 로드 시 첫 실행
+        window.onload = changeImageRandomly;
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="toggleBtn" class="bgm-btn off" onclick="toggleBGM()">🔈</button>
+    <button id="dark_mod" onclick="DarkMod()">다크모드</button>
+
+    <iframe id="bgm" width="0" height="0" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    
+    <center><h1>Random Limbus Prisoner</h1></center>
+    
+    <div id="parent">
+        <div class="first-box">
+            <img id="first_img" onclick="moveAndRemoveImage(this)" src="https://i.namu.wiki/i/ceEIr8CaGxbe2FEC72ahg8Ot3khVJczAV4aavg5MDogIKermB0CfLVaoLGGjx1RRphstEHAC31x62Cc99rxYYQ3nyLykbI6QmCIz5HCK6QBsxFOOzB7T6aJXCglmaetzaWR7UANjjOBLMXh_MmoB-Q.webp" alt="">
+        </div>
+
+        <div class="second-box">
+            <img id="second_img" onclick="moveAndRemoveImage(this)" src="https://i.namu.wiki/i/clfjQB0so1mTdBGA9x4miOpyp7xW5cJuOuge5Ddrb-C5W93VtP0lzvKSO8i6v1gPIuAmbfDG_e6z2HdbHpt7-hpUTTNYQ1FIsyrzT3Y6flYIyntcFycO-S6RnplMMJdSJVHsSz_z1xdWkeQio1Rxuw.webp" alt="">
+        </div>
+        
+        <div class="third-box">
+            <img id="third_img" onclick="moveAndRemoveImage(this)" src="https://i.namu.wiki/i/Pe-WdreMJk12pwTaV1L2ug2c7lXb8UUrh8DMPSmxRbcPpQzOytY-I84d2OPL1GlhAd-Bm65ufCUxWORdbIkzl3yqP1BMeQL73UnDSFBChzJp049RhY8nA-hHvFrLIuoJ7qsVuMy26P9FiuHa5QoYOw.webp" alt="">
+        </div>
+    </div>
+    <center><button id="random-btn" onclick="changeImageRandomly()">랜덤으로 돌리기</button></center>
+    <div id="selected-container">
+        <center><div class="selected-title">선택한 수감자</div></center>
+        <div id="selected-list"></div>
+    </div>
+</body>
+</html>
